@@ -37,5 +37,50 @@ terraform -help plan # ajouter une commande après le `-help` détaille cette op
 On peut maintenant installer un conteneur Docker contenant une image nginx :
 
 ```bash
-
+# On commence par créer le dossier qui va contenir les fichiers de confs qui vont décrire l'infra que Terraform devra gérer
+# Tous les plugins, modules et autres information sur l'infra structure que Terraform va gérer vont être stockés dans ce dossier
+mkdir learn-terraform-docker-container
+cd learn-terraform-docker-container
+vim main.tf
 ```
+
+Dans le nouveau fichier main.tf, on va insérer la configuration Terraform suivante, qui est très similaire à celle de l'exo du chapitre précédent: elle va chercher l'image docker nginx, créer un conteneur et le lancer en une seule commande (c'est un `docker pull nginx` suivi d'un `docker run nginx` en même temps):
+
+```bash
+terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "~> 3.0.1"
+    }
+  }
+}
+
+provider "docker" {}
+
+resource "docker_image" "nginx" {
+  name         = "nginx"
+  keep_locally = false
+}
+
+resource "docker_container" "nginx" {
+  image = docker_image.nginx.image_id
+  name  = "tutorial"
+
+  ports {
+    internal = 80
+    external = 8000
+  }
+}
+```
+
+On peut alors lancer les deux mêmes commandes qu'au chapitre précédent :
+
+```bash
+terraform init
+terraform apply
+```
+
+Le lancement du conteneur est à présent visible dans un `docker ps` et on peut bien voir le nginx installé sur `localhost:8000`.
+
+Comme au chapitre précédent, on stoppe le conteneur avec un ̀`terraform destroy`. Il n'est alors bien plus visible dans `docker ps`.

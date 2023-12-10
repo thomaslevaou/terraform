@@ -61,7 +61,7 @@ resource "docker_container" "nginx" {
 }
 ```
 
-J'ai l'impression qu'on a une construction d'image Docker nginx en local, puis un lancement sur les ports 8000:80. C'est comme si on scriptait un contenu de Dockerfile, puis qu'on faisait tout de suite un `docker build` puis un `docker run` avec les noms indiqués dans le fichier. Ça crée l'image ET le conteneur en même temps, et lance le conteneur.
+J'ai l'impression qu'on a une construction d'image Docker nginx en local, puis un lancement sur les ports 8000:80. C'est comme si on scriptait un contenu de Dockerfile, puis qu'on faisait tout de suite un `docker pull` puis un `docker run` avec les noms indiqués dans le fichier. Ça récupère l'image ET crée le conteneur en même temps, et lance ce dernier.
 
 Son exécution fait appel aux commandes suivantes :
 
