@@ -34,7 +34,7 @@ On peut collaborer à plusieurs avec Terraform, et on peut connecter Terraform C
 
 On peut écrire une configuration Terraform dans un fichier `main.tf` (c'est donc l'`author` résultant du `scope` ?), comme ci-dessous (appliqué dans l'éditeur interatif du site de Terraform):
 
-```bash
+```JS
 terraform {
   required_providers {
     docker = {
@@ -60,6 +60,8 @@ resource "docker_container" "nginx" {
   }
 }
 ```
+
+Oui j'ai coloré en JS même si je sais très bien que ça n'est pas du JS, mais je n'ai pas trouvé mieux...
 
 J'ai l'impression qu'on a une construction d'image Docker nginx en local, puis un lancement sur les ports 8000:80. C'est comme si on scriptait un contenu de Dockerfile, puis qu'on faisait tout de suite un `docker pull` puis un `docker run` avec les noms indiqués dans le fichier. Ça récupère l'image ET crée le conteneur en même temps, et lance ce dernier.
 

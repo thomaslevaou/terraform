@@ -46,7 +46,7 @@ vim main.tf
 
 Dans le nouveau fichier main.tf, on va insérer la configuration Terraform suivante, qui est très similaire à celle de l'exo du chapitre précédent: elle va chercher l'image docker nginx, créer un conteneur et le lancer en une seule commande (c'est un `docker pull nginx` suivi d'un `docker run nginx` en même temps):
 
-```bash
+```JS
 terraform {
   required_providers {
     docker = {
