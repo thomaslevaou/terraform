@@ -10,6 +10,7 @@ sudo ./aws/install
 aws --version # si cette commande retourne un résultat sans erreur apparente, on a alors bien réussi l'installation d'AWS
 
 # Pour que Terraform y ait accès, on doit spécifier nos clés d'accès AWS (la standard et la secrète)
+# Attention, c'est à refaire à chaque relancement de terminal (ou de PC !)
 export AWS_ACCESS_KEY_ID={{ma_cle_aws}}
 export AWS_SECRET_ACCESS_KEY={{ma_cle_secrete}}
 ```
@@ -66,7 +67,7 @@ Si besoin un jour, la doc pour plus de détails à ce sujet [est ici](https://de
 On appelle `resource` dans cette configuration Terraform un bloc utilisé pour définir un composant de l'infrastructure. Un composant peut être physique ou virtuel, et dans le cadre d'AWS, ça peut être une instance EC2 par exemple.
 Les deux chaînes de caractères suivant `resource` correspondent au type de la ressource (`"aws_instance"`) et son nom (`"app_server"`).  Attention au fait que le préfixe du type doit correspondre au nom du provider: ici, le préfixe `aws_` correspond bien au nom du provider qu'est `aws`. Le type de resource et son nom forment un unique ID pour la ressource : ici, l'id de l'instance EC2 est donc `aws_instance.app_server`.
 Chaque ressource dispose de sa propre liste d'arguments obligatoire et optionnels, listée [sur ce lien](https://developer.hashicorp.com/terraform/language/providers).
-Ici, on utilise l'argument `ami`  paramètre une AMI d'une image Ubuntu, l'argument `instance_type` pour avoir un type d'instance `t2.micro`, et l'argument `tags` pour ajouter un tag donnant comme nom à l'instance `ExampleAppServerInstance`.
+Ici, on utilise l'argument `ami` pour paramétrer une AMI d'une image Ubuntu, l'argument `instance_type` pour avoir un type d'instance `t2.micro`, et l'argument `tags` pour ajouter un tag donnant comme nom à l'instance `ExampleAppServerInstance`.
 
 ## Configuration Terraform - Initialisation, formatage et lancement
 
